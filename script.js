@@ -18,9 +18,20 @@ addTaskButton.addEventListener("click", function () {
     return;
   }
 
-  const listItem = document.createElement("li");
-  listItem.textContent = task;
 
-  taskList.appendChild(listItem);
-  taskInput.value = "";
+const listItem = document.createElement("li");
+listItem.textContent = task + " ";
+
+const deleteButton = document.createElement("button");
+deleteButton.textContent = "حذف";
+deleteButton.type = "button";
+
+deleteButton.addEventListener("click", function () {
+  listItem.remove();
 });
+
+listItem.appendChild(deleteButton);
+taskList.appendChild(listItem);
+
+taskInput.value = "";
+
