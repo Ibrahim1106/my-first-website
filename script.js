@@ -1,41 +1,35 @@
 
-const button = document.getElementById("welcomeButton");
-const message = document.getElementById("welcomeMessage");
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-button.addEventListener("click", function () {
-  message.textContent = "مرحبًا بك! لقد عملت JavaScript بنجاح.";
+    // 1. فتح وإغلاق القائمة عند النقر على زر الهاتف
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // 2. إغلاق القائمة تلقائياً عند النقر على أي رابط داخلها
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            
+            // التمرير السلس البرمجي وضمان إغلاق القائمة
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            // إغلاق قائمة الهواتف عند الاختيار
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
 });
-
-const taskInput = document.getElementById("taskInput");
-const addTaskButton = document.getElementById("addTaskButton");
-const taskList = document.getElementById("taskList");
-
-
-addTaskButton.addEventListener("click", function () {
-  const task = taskInput.value.trim();
-
-  if (task === "") {
-    alert("اكتب مهمة أولًا!");
-    return;
-  }
-
-  const listItem = document.createElement("li");
-
-  const taskText = document.createElement("span");
-  taskText.textContent = task + " ";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "حذف";
-  deleteButton.type = "button";
-
-  deleteButton.addEventListener("click", function () {
-    listItem.remove();
-  });
-
-  listItem.appendChild(taskText);
-  listItem.appendChild(deleteButton);
-  taskList.appendChild(listItem);
-
-  taskInput.value = "";
-});
-
