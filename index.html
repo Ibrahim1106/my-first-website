@@ -1,78 +1,78 @@
 
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقعي الشخصي</title>
+    <!-- ربط خط Tajawal من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ربط ملف التنسيقات CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav>
-        <a href="#home">الرئيسية</a>
-        <a href="#about">من أنا</a>
-        <a href="#skills">مهاراتي</a>
-    </nav>
-
-    <header class="hero" id="home">
-        <h1>مرحبًا بك في موقعي!</h1>
-        <p>أنا أتعلم البرمجة وتطوير المواقع باستخدام HTML وCSS وGitHub.</p>
-        <a class="button" href="#about">اكتشف المزيد</a>
+    <!-- الهيدر وقائمة التنقل -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">موقعي</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#about">عن الموقع</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container">
-        <section id="about">
-            <h2>من أنا؟</h2>
-            <p>
-                هذا أول مشروع ويب أعمل عليه، وأطوره تدريجيًا
-                لاكتساب مهارات تصميم المواقع ونشرها.
-            </p>
-        </section>
+    <!-- قسم البطل / الواجهة -->
+    <section id="hero" class="hero">
+        <div class="container hero-content">
+            <h1>مرحباً بك في موقعي الجديد!</h1>
+            <p>هذا القالب جاهز للنشر على GitHub Pages وهو متوافق مع كافة الشاشات للهواتف والحواسيب.</p>
+            <a href="#about" class="btn">ابدأ الاستكشاف</a>
+        </div>
+    </section>
 
-        <section id="skills">
-            <h2>ما الذي أتعلمه؟</h2>
+    <!-- قسم عن الموقع -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">من نحن</h2>
+            <p class="text-center">نحن نعمل على تقديم أفضل الحلول البرمجية وتطوير المواقع باستخدام أحدث التقنيات المعيارية.</p>
+        </div>
+    </section>
 
-            <div class="cards">
-                <article class="card">
-                    <h3>HTML</h3>
-                    <p>بناء هيكل صفحات الويب وتنظيم المحتوى.</p>
-                </article>
-
-                <article class="card">
-                    <h3>CSS</h3>
-                    <p>تنسيق الصفحات والألوان والخطوط والتصميم المتجاوب.</p>
-                </article>
-
-                <article class="card">
-                    <h3>GitHub</h3>
-                    <p>إدارة إصدارات المشروع ونشره والتعاون في تطويره.</p>
-                </article>
+    <!-- قسم البطاقات / الخدمات -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">خدماتنا</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>تصميم واجهات</h3>
+                    <p>تصاميم إبداعية وتجربة المستخدم متجاوبة مع كافة الشاشات.</p>
+                </div>
+                <div class="card">
+                    <h3>تطوير ويب</h3>
+                    <p>كتابة أكواد نظيفة وسريعة التحميل لخدمة موقعك بشكل ممتاز.</p>
+                </div>
+                <div class="card">
+                    <h3>استضافة مجانية</h3>
+                    <p>رفع الموقع واستضافته بسهولة باستخدام خدمة GitHub Pages.</p>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>
-        <p>مشروعي الأول لتعلم تطوير المواقع</p>
-    </footer>   
-<h2>جرّب JavaScript</h2>
-<p id="welcomeMessage">اضغط على الزر لتجربة التفاعل.</p>
-<button id="welcomeButton" type="button">اضغط هنا</button>
- 
-<hr>
+        </div>
+    </section>
 
-<h2>قائمة مهامي</h2>
+    <!-- الفوتر / التذييل -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2026 جميع الحقوق محفوظة - تم التطوير بحب ❤️</p>
+        </div>
+    </footer>
 
-<input id="taskInput" type="text" placeholder="اكتب مهمة جديدة">
-
-<button id="addTaskButton" type="button">
-  إضافة المهمة
-</button>
-
-<ul id="taskList"></ul>
-   
-<script src="script.js" defer></script>
 </body>
 </html>
-
