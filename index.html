@@ -18,12 +18,18 @@
     <header class="header">
         <div class="container nav-container">
             <a href="#" class="logo">موقعي</a>
-            <nav>
+            
+            <!-- زر قائمة الهواتف -->
+            <button class="nav-toggle" aria-label="فتح القائمة">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav class="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="#hero">الرئيسية</a></li>
-                    <li><a href="#about">عن الموقع</a></li>
-                    <li><a href="#services">الخدمات</a></li>
-                    <li><a href="#contact">تواصل معنا</a></li>
+                    <li><a href="#hero" class="nav-link">الرئيسية</a></li>
+                    <li><a href="#about" class="nav-link">عن الموقع</a></li>
+                    <li><a href="#services" class="nav-link">الخدمات</a></li>
+                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,7 +40,7 @@
         <div class="container hero-content">
             <h1>مرحباً بك في موقعي الجديد!</h1>
             <p>هذا القالب جاهز للنشر على GitHub Pages وهو متوافق مع كافة الشاشات للهواتف والحواسيب.</p>
-            <a href="#about" class="btn">ابدأ الاستكشاف</a>
+            <a href="#about" class="btn nav-link">ابدأ الاستكشاف</a>
         </div>
     </section>
 
@@ -74,5 +80,7 @@
         </div>
     </footer>
 
+    <!-- ربط ملف JavaScript -->
+    <script src="main.js"></script>
 </body>
 </html>
