@@ -1,84 +1,965 @@
 
+```html
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الشخصي</title>
-    <!-- ربط خط Tajawal من Google Fonts -->
+    <title>منصة التطور الرقمي | المطور الاحترافي</title>
+    
+    <!-- Google Fonts: Cairo & Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <!-- ربط ملف التنسيقات CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f6ff',
+                            100: '#e0edff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            accent: '#8b5cf6',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4'
+                        },
+                        dark: {
+                            bg: '#090d16',
+                            card: 'rgba(17, 24, 39, 0.7)',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.5))' },
+                            '100%': { opacity: '0.8', filter: 'drop-shadow(0 0 35px rgba(139, 92, 246, 0.8))' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Glassmorphism & UI Enhancements */
+        body {
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dark .glass-panel {
+            background: rgba(13, 19, 33, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dark .glass-card {
+            background: rgba(17, 25, 40, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Gradient Glow Effects */
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .gradient-border:hover::after {
+            opacity: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.8);
+        }
+
+        /* Interactive Sound Ripple */
+        .click-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 dark:bg-[#070b14] dark:text-gray-100 transition-colors duration-500 relative selection:bg-brand-500 selection:text-white">
 
-    <!-- الهيدر وقائمة التنقل -->
-    <header class="header">
-        <div class="container nav-container">
-            <a href="#" class="logo">موقعي</a>
+    <!-- Interactive Canvas Particle Background -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60 dark:opacity-80"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-4 sm:px-8" id="navbar">
+        <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between shadow-lg">
             
-            <!-- زر قائمة الهواتف -->
-            <button class="nav-toggle" aria-label="فتح القائمة">
-                <span class="hamburger"></span>
-            </button>
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-accent to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:rotate-12 transition-transform duration-300">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg leading-tight tracking-wide gradient-text">تَكَـامُل</span>
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-wider">FUTURE TECH LAB</span>
+                </div>
+            </a>
 
-            <nav class="nav-menu">
-                <ul class="nav-links">
-                    <li><a href="#hero" class="nav-link">الرئيسية</a></li>
-                    <li><a href="#about" class="nav-link">عن الموقع</a></li>
-                    <li><a href="#services" class="nav-link">الخدمات</a></li>
-                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
-                </ul>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <a href="#hero" class="hover:text-brand-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 hover:after:w-full after:transition-all">الرئيسية</a>
+                <a href="#about" class="hover:text-brand-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 hover:after:w-full after:transition-all">عن المنصة</a>
+                <a href="#portfolio" class="hover:text-brand-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 hover:after:w-full after:transition-all">المشاريع المتطورة</a>
+                <a href="#stats" class="hover:text-brand-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 hover:after:w-full after:transition-all">الإحصائيات</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 hover:after:w-full after:transition-all">تواصل معنا</a>
             </nav>
+
+            <!-- Actions (Theme Toggle, Audio Toggle, Mobile Menu Button) -->
+            <div class="flex items-center gap-3">
+                
+                <!-- Audio FX Toggle -->
+                <button id="sound-toggle" aria-label="مؤثرات الصوت" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-brand-500 transition-colors">
+                    <i class="fa-solid fa-volume-xmark text-lg" id="sound-icon"></i>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" aria-label="تبديل المظهر" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-amber-500 dark:text-cyan-400 hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
+                    <i class="fa-solid fa-moon block dark:hidden text-lg"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="القائمة" class="md:hidden w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-700 dark:text-gray-200">
+                    <i class="fa-solid fa-bars-staggered text-lg"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- قسم البطل / الواجهة -->
-    <section id="hero" class="hero">
-        <div class="container hero-content">
-            <h1>مرحباً بك في موقعي الجديد!</h1>
-            <p>هذا القالب جاهز للنشر على GitHub Pages وهو متوافق مع كافة الشاشات للهواتف والحواسيب.</p>
-            <a href="#about" class="btn nav-link">ابدأ الاستكشاف</a>
-        </div>
-    </section>
-
-    <!-- قسم عن الموقع -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">من نحن</h2>
-            <p class="text-center">نحن نعمل على تقديم أفضل الحلول البرمجية وتطوير المواقع باستخدام أحدث التقنيات المعيارية.</p>
-        </div>
-    </section>
-
-    <!-- قسم البطاقات / الخدمات -->
-    <section id="services" class="section bg-light">
-        <div class="container">
-            <h2 class="section-title">خدماتنا</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>تصميم واجهات</h3>
-                    <p>تصاميم إبداعية وتجربة المستخدم متجاوبة مع كافة الشاشات.</p>
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden flex justify-end">
+        <div class="w-4/5 max-w-sm h-full glass-panel p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 id-drawer-content shadow-2xl">
+            <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-800">
+                    <span class="font-bold text-lg gradient-text">قائمة التنقل</span>
+                    <button id="close-drawer" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
                 </div>
-                <div class="card">
-                    <h3>تطوير ويب</h3>
-                    <p>كتابة أكواد نظيفة وسريعة التحميل لخدمة موقعك بشكل ممتاز.</p>
-                </div>
-                <div class="card">
-                    <h3>استضافة مجانية</h3>
-                    <p>رفع الموقع واستضافته بسهولة باستخدام خدمة GitHub Pages.</p>
-                </div>
+                <nav class="flex flex-col gap-4 font-semibold text-lg">
+                    <a href="#hero" class="mobile-link py-2 px-3 rounded-xl hover:bg-brand-500/10 hover:text-brand-500 transition-all">الرئيسية</a>
+                    <a href="#about" class="mobile-link py-2 px-3 rounded-xl hover:bg-brand-500/10 hover:text-brand-500 transition-all">عن المنصة</a>
+                    <a href="#portfolio" class="mobile-link py-2 px-3 rounded-xl hover:bg-brand-500/10 hover:text-brand-500 transition-all">المشاريع المتطورة</a>
+                    <a href="#stats" class="mobile-link py-2 px-3 rounded-xl hover:bg-brand-500/10 hover:text-brand-500 transition-all">الإحصائيات</a>
+                    <a href="#contact" class="mobile-link py-2 px-3 rounded-xl hover:bg-brand-500/10 hover:text-brand-500 transition-all">تواصل معنا</a>
+                </nav>
+            </div>
+            <div class="pt-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500">
+                منصة تكامل الرقمية &copy; 2026
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- الفوتر / التذييل -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <p>&copy; 2026 جميع الحقوق محفوظة - تم التطوير بحب ❤️</p>
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="relative z-10 pt-28">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="min-h-[88vh] flex items-center justify-center px-4 sm:px-6 relative overflow-hidden">
+            <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs sm:text-sm font-semibold text-brand-600 dark:text-cyan-400 border border-brand-500/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>جيل جديد من حلول الويب البرمجية المتطورة</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight">
+                        نبتكر واجهات <br>
+                        <span class="gradient-text">المستقبل التفاعلية</span> برؤية ذكية
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed font-light">
+                        دمج احترافي بين الذكاء الاصطناعي، أداء الويب الفائق، وتجارب المستخدم الثلاثية الأبعاد. نبني حلولاً تحول الفكرة إلى بيئة رقمية ينبض فيها الابتكار.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#portfolio" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-105 transition-all flex items-center gap-3">
+                            <span>استكشف الأعمال</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-4 rounded-2xl glass-card font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-all flex items-center gap-3">
+                            <i class="fa-solid fa-paper-plane text-brand-500"></i>
+                            <span>تواصل مباشر</span>
+                        </a>
+                    </div>
+
+                    <!-- Tech Badges -->
+                    <div class="pt-6 flex items-center justify-center lg:justify-start gap-6 text-gray-400 text-sm font-mono">
+                        <span class="flex items-center gap-2"><i class="fa-brands fa-react text-cyan-400 text-lg"></i> React / Next.js</span>
+                        <span class="flex items-center gap-2"><i class="fa-brands fa-python text-amber-400 text-lg"></i> AI Integration</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400 text-lg"></i> Dynamic Canvas</span>
+                    </div>
+                </div>
+
+                <!-- 3D Interactive Card Showcase (Hero Right) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div id="hero-card-container" class="relative w-full max-w-md aspect-square perspective-1000">
+                        <!-- Hologram Glowing Background -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-500 to-purple-600 rounded-3xl blur-3xl opacity-30 animate-pulse-glow"></div>
+                        
+                        <!-- Main Interactive 3D Parallax Card -->
+                        <div id="hero-card" class="relative w-full h-full glass-panel rounded-3xl p-8 flex flex-col justify-between border border-white/20 dark:border-white/10 shadow-2xl cursor-pointer transition-transform duration-100 ease-out">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-500/20 flex items-center justify-center text-brand-500 text-2xl">
+                                    <i class="fa-solid fa-cube animate-spin-slow"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono bg-brand-500/10 text-brand-500 font-semibold border border-brand-500/20">v4.0.0-PRO</span>
+                            </div>
+
+                            <div class="space-y-4 my-auto">
+                                <div class="h-2 w-20 bg-brand-500 rounded-full"></div>
+                                <h3 class="text-2xl font-bold">محرك المعالجة الفائقة</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    نظام متطوّر يعتمد على معالجة رسوميات الفريمورك وتصميم الأنظمة ذات الاستجابة العالية لجعل تجربة تصفحك فخمة وسريعة.
+                                </p>
+                            </div>
+
+                            <div class="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-800">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-400">كفاءة الأداء:</span>
+                                    <span class="text-emerald-500 font-bold">99.9%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 w-[99%] rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT / FEATURES SECTION -->
+        <section id="about" class="py-24 px-4 sm:px-6 relative">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <div class="text-center space-y-4 max-w-2xl mx-auto">
+                    <h2 class="text-3xl sm:text-5xl font-extrabold">لماذا نعتبر <span class="gradient-text">الخيار المبتكر؟</span></h2>
+                    <p class="text-gray-600 dark:text-gray-400">ميزات حصرية تجعل حلولنا التقنية تتصدر معايير الجودة العالمية</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Feature 1 -->
+                    <div class="glass-card p-8 rounded-3xl space-y-5 border-t-4 border-t-brand-500">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">معالجة الذكاء الاصطناعي</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            دمج أدوات الذكاء الاصطناعي التوليدي والأنظمة التنبؤية داخل واجهات المستخدم لتقديم تجارب مخصصة وفريدة.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="glass-card p-8 rounded-3xl space-y-5 border-t-4 border-t-purple-500">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-500 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">سرعة وأداء استثنائي</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            الأكواد المعتمدة مبنية بأعلى قدر من التحسين لضمان أوقات تحميل تقاس بالميلي ثانية وتجاوب لا متناهي.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="glass-card p-8 rounded-3xl space-y-5 border-t-4 border-t-cyan-500">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">أمان وحماية قصوى</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            تطبيق أفضل ممارسات التشفير والمعايير العالمية لحماية البيانات والمحتوى الرقمي من التهديدات.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- DYNAMIC PORTFOLIO SHOWCASE -->
+        <section id="portfolio" class="py-24 px-4 sm:px-6 relative">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-3">
+                        <span class="text-brand-500 font-mono font-bold text-sm tracking-wider uppercase">Portfolio Gallery</span>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold">معرض <span class="gradient-text">المشاريع الحديثة</span></h2>
+                    </div>
+
+                    <!-- Portfolio Filter Buttons -->
+                    <div class="flex flex-wrap items-center gap-2 p-1.5 glass-panel rounded-2xl" id="portfolio-filters">
+                        <button data-filter="all" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md">الكل</button>
+                        <button data-filter="web" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-600 dark:text-gray-300 hover:text-brand-500">منصات الويب</button>
+                        <button data-filter="mobile" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-600 dark:text-gray-300 hover:text-brand-500">تطبيقات الجوال</button>
+                        <button data-filter="ai" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-600 dark:text-gray-300 hover:text-brand-500">حلول الذكاء الاصطناعي</button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                    
+                    <!-- Item 1 -->
+                    <div class="portfolio-item glass-card rounded-3xl overflow-hidden group" data-category="web">
+                        <div class="relative h-60 overflow-hidden bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center p-6">
+                            <i class="fa-solid fa-chart-line text-7xl text-white/20 group-hover:scale-125 transition-transform duration-500"></i>
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-xs font-mono text-cyan-400">Web App</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold group-hover:text-brand-500 transition-colors">منصة تحليل البيانات المالية</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">لوحة تحكم تفاعلية معالجة بالوقت الفعلي لعرض تحليلات الاستثمار والأسواق العالمية.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <span class="text-xs font-mono text-brand-500">#React #Tailwind #D3</span>
+                                <button onclick="openModal('منصة تحليل البيانات المالية', 'تفاصيل شاملة حول نظام التحليل المالي والمؤشرات التفاعلية المدعومة بنماذج تنبؤ بيانية عالية السرعة.')" class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="portfolio-item glass-card rounded-3xl overflow-hidden group" data-category="mobile">
+                        <div class="relative h-60 overflow-hidden bg-gradient-to-br from-purple-900 to-pink-900 flex items-center justify-center p-6">
+                            <i class="fa-solid fa-mobile-screen-button text-7xl text-white/20 group-hover:scale-125 transition-transform duration-500"></i>
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-xs font-mono text-pink-400">Mobile</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold group-hover:text-brand-500 transition-colors">تطبيق الصحة واللياقة الذكي</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">تطبيق جوال يتابع المؤشرات الحيوية باستخدام مستشعرات الساعة الذكية والإنترنت الأشياء.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <span class="text-xs font-mono text-purple-400">#Flutter #IoT #Health</span>
+                                <button onclick="openModal('تطبيق الصحة واللياقة الذكي', 'تطبيق متكامل لتتبع النشاط البدني مع المساعد الصوتي والتنبؤات الصحية الذكية.')" class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="portfolio-item glass-card rounded-3xl overflow-hidden group" data-category="ai">
+                        <div class="relative h-60 overflow-hidden bg-gradient-to-br from-emerald-900 to-teal-900 flex items-center justify-center p-6">
+                            <i class="fa-solid fa-robot text-7xl text-white/20 group-hover:scale-125 transition-transform duration-500"></i>
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-xs font-mono text-emerald-400">AI / Cloud</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold group-hover:text-brand-500 transition-colors">محرك التوليد اللغوي العربي</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">نموذج ذكاء اصطناعي مدرب لتوليد المحتوى وصياغة المقالات وتلخيص النصوص العربية بدقة.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <span class="text-xs font-mono text-emerald-400">#Python #LLM #API</span>
+                                <button onclick="openModal('محرك التوليد اللغوي العربي', 'نظام لغوي ذكي مخصص لمعالجة اللغة العربية وفهم المعاني مع بناء سيناريوهات المحتوى المتعدد.')" class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="portfolio-item glass-card rounded-3xl overflow-hidden group" data-category="web">
+                        <div class="relative h-60 overflow-hidden bg-gradient-to-br from-amber-900 to-red-900 flex items-center justify-center p-6">
+                            <i class="fa-solid fa-store text-7xl text-white/20 group-hover:scale-125 transition-transform duration-500"></i>
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-xs font-mono text-amber-400">Web App</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold group-hover:text-brand-500 transition-colors">متجر ثلاثي الأبعاد تفاعلي</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">تجربة تسوق مستقبلي تتيح للعملاء معاينة المنتجات وتقليبها بتقنية 3D قبل الشراء.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <span class="text-xs font-mono text-amber-400">#ThreeJS #WebGL #Shop</span>
+                                <button onclick="openModal('متجر ثلاثي الأبعاد تفاعلي', 'تجربة تجارة إلكترونية متطورة تدعم التصاميم ثلاثية الأبعاد والتفاعل الحي.')" class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- STATS / METRICS COUNTER SECTION -->
+        <section id="stats" class="py-20 px-4 sm:px-6 relative">
+            <div class="max-w-7xl mx-auto glass-panel rounded-3xl p-8 sm:p-12 border border-brand-500/20 shadow-2xl">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x lg:divide-x-reverse divide-gray-200 dark:divide-gray-800">
+                    
+                    <div class="space-y-2 p-4">
+                        <div class="text-4xl sm:text-6xl font-black gradient-text font-mono tracking-tight" data-target="150">0</div>
+                        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">مشروع ناجح مكتمل</div>
+                    </div>
+
+                    <div class="space-y-2 p-4">
+                        <div class="text-4xl sm:text-6xl font-black gradient-text font-mono tracking-tight" data-target="99">0</div>
+                        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">نسبة رضا العملاء %</div>
+                    </div>
+
+                    <div class="space-y-2 p-4">
+                        <div class="text-4xl sm:text-6xl font-black gradient-text font-mono tracking-tight" data-target="45">0</div>
+                        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">تطبيق ذكاء اصطناعي</div>
+                    </div>
+
+                    <div class="space-y-2 p-4">
+                        <div class="text-4xl sm:text-6xl font-black gradient-text font-mono tracking-tight" data-target="24">0</div>
+                        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">ساعة دعم فني مباشر /7</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 px-4 sm:px-6 relative">
+            <div class="max-w-5xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-4">
+                    <span class="text-brand-500 font-mono font-bold text-sm tracking-wider uppercase">Contact Center</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold">تواصل مع <span class="gradient-text">فريق التطوير</span></h2>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">ارسل استفساراتك أو فكرتك المستقبلية وسنرد عليك في غضون دقائق</p>
+                </div>
+
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/20 shadow-2xl">
+                    <form id="contact-form" class="space-y-6" novalidate>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            
+                            <!-- Name Input -->
+                            <div class="space-y-2">
+                                <label for="name" class="block text-sm font-bold text-gray-700 dark:text-gray-300">الاسم الكامل</label>
+                                <div class="relative">
+                                    <input type="text" id="name" required placeholder="أدخل اسمك هنا" class="w-full px-5 py-4 rounded-2xl glass-card bg-transparent border border-gray-300 dark:border-gray-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all text-sm">
+                                    <span class="error-msg text-xs text-rose-500 hidden mt-1">يرجى كتابة الاسم بشكل صحيح</span>
+                                </div>
+                            </div>
+
+                            <!-- Email Input -->
+                            <div class="space-y-2">
+                                <label for="email" class="block text-sm font-bold text-gray-700 dark:text-gray-300">البريد الإلكتروني</label>
+                                <div class="relative">
+                                    <input type="email" id="email" required placeholder="name@example.com" class="w-full px-5 py-4 rounded-2xl glass-card bg-transparent border border-gray-300 dark:border-gray-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all text-sm font-mono dir-ltr text-right">
+                                    <span class="error-msg text-xs text-rose-500 hidden mt-1">يرجى إدخال بريد إلكتروني صحيح</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="space-y-2">
+                            <label for="subject" class="block text-sm font-bold text-gray-700 dark:text-gray-300">موضوع الرسالة</label>
+                            <input type="text" id="subject" required placeholder="عنوان استفسارك أو مشروعك" class="w-full px-5 py-4 rounded-2xl glass-card bg-transparent border border-gray-300 dark:border-gray-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all text-sm">
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="space-y-2">
+                            <label for="message" class="block text-sm font-bold text-gray-700 dark:text-gray-300">تفاصيل الرسالة</label>
+                            <textarea id="message" rows="5" required placeholder="اكتب تفاصيل الفكرة أو التطبيق المطلوبة..." class="w-full px-5 py-4 rounded-2xl glass-card bg-transparent border border-gray-300 dark:border-gray-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all text-sm resize-none"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-600 via-brand-accent to-pink-500 text-white font-bold text-base shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>إرسال الرسالة الآن</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-gray-200 dark:border-gray-800 py-12 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center text-brand-500 font-bold">ت</div>
+                <span class="font-bold text-gray-700 dark:text-gray-200">منصة تكامل للحلول المتقدمة</span>
+            </div>
+            <div>
+                &copy; 2026 جميع الحقوق محفوظة. صُمم بأعلى معايير الويب الفائقة.
+            </div>
+            <div class="flex items-center gap-4 text-lg">
+                <a href="#" class="hover:text-brand-500 transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-brand-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-brand-500 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
         </div>
     </footer>
+
+    <!-- MODAL POPUP SHOWCASE -->
+    <div id="modal-backdrop" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-xl rounded-3xl p-8 space-y-6 transform scale-95 transition-transform duration-300 id-modal-box shadow-2xl relative border border-white/20">
+            <button onclick="closeModal()" class="absolute top-6 left-6 w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-500 hover:text-rose-500 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-cube"></i>
+            </div>
+            <h3 id="modal-title" class="text-2xl font-bold">عنوان المشروع</h3>
+            <p id="modal-desc" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">وصف تفصيلي كامل...</p>
+            <div class="pt-4 flex justify-end">
+                <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl bg-brand-600 text-white font-bold text-sm hover:bg-brand-700 transition-all">إغلاق المعاينة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- AUDIO FX SYNTHESIZER (Web Audio API) -->
+    <script>
+        class AudioFX {
+            constructor() {
+                this.ctx = null;
+                this.enabled = false;
+            }
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+            playTone(freq = 440, type = 'sine', duration = 0.1) {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.00001, this.ctx.currentTime + duration);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + duration);
+                } catch(e) {}
+            }
+            clickSound() { this.playTone(600, 'sine', 0.08); }
+            successSound() { 
+                this.playTone(523.25, 'triangle', 0.1); 
+                setTimeout(() => this.playTone(659.25, 'triangle', 0.15), 80);
+            }
+        }
+        const audio = new AudioFX();
+    </script>
+
+    <!-- CORE JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ====================================================
+               1. CANVASES / PARTICLE SYSTEM BACKGROUND
+               ==================================================== */
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: null, y: null, radius: 150 };
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.x;
+                mouse.y = e.y;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.5) * 0.6;
+                }
+                draw() {
+                    const isDark = document.documentElement.classList.contains('dark');
+                    ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.5)' : 'rgba(59, 130, 246, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                    // Mouse Interaction
+                    if (mouse.x && mouse.y) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            let angle = Math.atan2(dy, dx);
+                            let force = (mouse.radius - distance) / mouse.radius;
+                            this.x -= Math.cos(angle) * force * 3;
+                            this.y -= Math.sin(angle) * force * 3;
+                        }
+                    }
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                let count = Math.min(Math.floor(window.innerWidth / 15), 90);
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            initParticles();
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].draw();
+                    particles[i].update();
+
+                    // Draw connecting lines
+                    for (let j = i; j < particles.length; j++) {
+                        let dx = particles[i].x - particles[j].x;
+                        let dy = particles[i].y - particles[j].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 110) {
+                            const isDark = document.documentElement.classList.contains('dark');
+                            ctx.strokeStyle = isDark ? 
+                                `rgba(139, 92, 246, ${1 - dist / 110})` : 
+                                `rgba(59, 130, 246, ${0.4 - dist / 110})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            /* ====================================================
+               2. THEME & AUDIO TOGGLE
+               ==================================================== */
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                audio.clickSound();
+                showToast('تم تغيير نمط المظهر بنجاح', 'info');
+            });
+
+            const soundToggle = document.getElementById('sound-toggle');
+            const soundIcon = document.getElementById('sound-icon');
+            soundToggle.addEventListener('click', () => {
+                audio.enabled = !audio.enabled;
+                if (audio.enabled) {
+                    soundIcon.className = 'fa-solid fa-volume-high text-lg text-brand-500';
+                    audio.clickSound();
+                    showToast('تم تفعيل المؤثرات الصوتية', 'success');
+                } else {
+                    soundIcon.className = 'fa-solid fa-volume-xmark text-lg';
+                    showToast('تم كتم الصوت', 'info');
+                }
+            });
+
+            /* ====================================================
+               3. 3D PARALLAX HERO CARD
+               ==================================================== */
+            const heroCardContainer = document.getElementById('hero-card-container');
+            const heroCard = document.getElementById('hero-card');
+
+            heroCardContainer.addEventListener('mousemove', (e) => {
+                const rect = heroCardContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                const rotateX = (-y / rect.height) * 25;
+                const rotateY = (x / rect.width) * 25;
+
+                heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            heroCardContainer.addEventListener('mouseleave', () => {
+                heroCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            });
+
+            /* ====================================================
+               4. PORTFOLIO FILTER SYSTEM
+               ==================================================== */
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    audio.clickSound();
+                    filterBtns.forEach(b => {
+                        b.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-600 dark:text-gray-300 hover:text-brand-500';
+                    });
+                    btn.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md';
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    portfolioItems.forEach(item => {
+                        const cat = item.getAttribute('data-category');
+                        if (filter === 'all' || filter === cat) {
+                            item.style.display = 'block';
+                            setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.8)';
+                            setTimeout(() => { item.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+            });
+
+            /* ====================================================
+               5. STATS ANIMATED COUNTER ON SCROLL
+               ==================================================== */
+            const statNumbers = document.querySelectorAll('[data-target]');
+            let animatedStats = false;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animatedStats) {
+                        animatedStats = true;
+                        statNumbers.forEach(num => {
+                            const target = +num.getAttribute('data-target');
+                            let count = 0;
+                            const speed = target / 40;
+                            const updateCount = () => {
+                                count += speed;
+                                if (count < target) {
+                                    num.innerText = Math.ceil(count);
+                                    setTimeout(updateCount, 30);
+                                } else {
+                                    num.innerText = target;
+                                }
+                            };
+                            updateCount();
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.getElementById('stats'));
+
+            /* ====================================================
+               6. CONTACT FORM REAL-TIME VALIDATION & TOAST
+               ==================================================== */
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+
+                if (name.value.trim().length < 3) {
+                    name.nextElementSibling.classList.remove('hidden');
+                    valid = false;
+                } else {
+                    name.nextElementSibling.classList.add('hidden');
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value.trim())) {
+                    email.nextElementSibling.classList.remove('hidden');
+                    valid = false;
+                } else {
+                    email.nextElementSibling.classList.add('hidden');
+                }
+
+                if (valid) {
+                    audio.successSound();
+                    showToast('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
+                    form.reset();
+                } else {
+                    audio.clickSound();
+                    showToast('يرجى التأكد من ملء البيانات بشكل صحيح', 'error');
+                }
+            });
+
+            /* Global Ripple Click Effect */
+            document.addEventListener('click', (e) => {
+                let ripple = document.createElement('div');
+                ripple.className = 'click-ripple';
+                ripple.style.left = `${e.clientX - 10}px`;
+                ripple.style.top = `${e.clientY - 10}px`;
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+
+            /* ====================================================
+               7. MOBILE DRAWER NAVIGATION
+               ==================================================== */
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeDrawer = document.getElementById('close-drawer');
+            const drawer = document.getElementById('mobile-drawer');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleDrawer(open) {
+                audio.clickSound();
+                if (open) {
+                    drawer.classList.remove('pointer-events-none', 'opacity-0');
+                    drawer.classList.add('opacity-100');
+                    drawer.querySelector('.id-drawer-content').classList.remove('translate-x-full');
+                } else {
+                    drawer.classList.add('opacity-0');
+                    drawer.querySelector('.id-drawer-content').classList.add('translate-x-full');
+                    setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
+                }
+            }
+
+            mobileBtn.addEventListener('click', () => toggleDrawer(true));
+            closeDrawer.addEventListener('click', () => toggleDrawer(false));
+            mobileLinks.forEach(link => link.addEventListener('click', () => toggleDrawer(false)));
+
+        });
+
+        /* Modal Functions */
+        function openModal(title, desc) {
+            audio.clickSound();
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            const backdrop = document.getElementById('modal-backdrop');
+            backdrop.classList.remove('pointer-events-none', 'opacity-0');
+            backdrop.classList.add('opacity-100');
+            backdrop.querySelector('.id-modal-box').classList.remove('scale-95');
+            backdrop.querySelector('.id-modal-box').classList.add('scale-100');
+        }
+
+        function closeModal() {
+            audio.clickSound();
+            const backdrop = document.getElementById('modal-backdrop');
+            backdrop.classList.add('opacity-0');
+            backdrop.querySelector('.id-modal-box').classList.add('scale-95');
+            setTimeout(() => backdrop.classList.add('pointer-events-none'), 300);
+        }
+
+        /* Toast Notification Helper */
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bg = 'bg-slate-900 border-brand-500 text-white';
+            let icon = 'fa-circle-info text-brand-500';
+            
+            if (type === 'success') {
+                bg = 'bg-slate-900 border-emerald-500 text-white';
+                icon = 'fa-circle-check text-emerald-500';
+            } else if (type === 'error') {
+                bg = 'bg-slate-900 border-rose-500 text-white';
+                icon = 'fa-triangle-exclamation text-rose-500';
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-2xl border shadow-2xl ${bg} backdrop-blur-xl transition-all duration-300 transform translate-y-4 opacity-0 text-sm font-semibold`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span>${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
+```
 
     <!-- ربط ملف JavaScript -->
     <script src="main.js"></script>
