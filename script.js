@@ -10,6 +10,7 @@ const taskInput = document.getElementById("taskInput");
 const addTaskButton = document.getElementById("addTaskButton");
 const taskList = document.getElementById("taskList");
 
+
 addTaskButton.addEventListener("click", function () {
   const task = taskInput.value.trim();
 
@@ -18,20 +19,23 @@ addTaskButton.addEventListener("click", function () {
     return;
   }
 
+  const listItem = document.createElement("li");
 
-const listItem = document.createElement("li");
-listItem.textContent = task + " ";
+  const taskText = document.createElement("span");
+  taskText.textContent = task + " ";
 
-const deleteButton = document.createElement("button");
-deleteButton.textContent = "حذف";
-deleteButton.type = "button";
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "حذف";
+  deleteButton.type = "button";
 
-deleteButton.addEventListener("click", function () {
-  listItem.remove();
+  deleteButton.addEventListener("click", function () {
+    listItem.remove();
+  });
+
+  listItem.appendChild(taskText);
+  listItem.appendChild(deleteButton);
+  taskList.appendChild(listItem);
+
+  taskInput.value = "";
 });
-
-listItem.appendChild(deleteButton);
-taskList.appendChild(listItem);
-
-taskInput.value = "";
 
