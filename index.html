@@ -1,39 +1,63 @@
 
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الأول</title>
+    <title>موقعي الشخصي</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<nav>
-    <a href="#home">الرئيسية</a>
-    <a href="#about">من نحن</a>
-    <a href="#contact">اتصل بنا</a>
-</nav>
 
-<section id="home">
-    <h1>مرحبًا بكم في موقعي!</h1>
-    <p>هذا أول مشروع أطورّه باستخدام GitHub.</p>
-</section>
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#about">من أنا</a>
+        <a href="#skills">مهاراتي</a>
+    </nav>
 
-<section id="about">
-    <h2>من نحن</h2>
-    <p>نتعلم تطوير المواقع خطوة بخطوة.</p>
-</section>
+    <header class="hero" id="home">
+        <h1>مرحبًا بك في موقعي!</h1>
+        <p>أنا أتعلم البرمجة وتطوير المواقع باستخدام HTML وCSS وGitHub.</p>
+        <a class="button" href="#about">اكتشف المزيد</a>
+    </header>
 
-<section id="contact">
-    <h2>اتصل بنا</h2>
-    <p>أضف معلومات التواصل هنا لاحقًا.</p>
-</section>
-    <h1>مرحبًا بكم في موقعي الأول!</h1>
-    <p>أنا أتعلم البرمجة وتطوير المواقع.</p>
-    <button onclick="alert('أحسنت! موقعك يعمل.')">
-        اضغط هنا
-    </button>
-<p>أعمل الآن على مشروعي من حاسوبي باستخدام Git!</p>
-<h2>رحلتي في تعلم تطوير المواقع</h2>
+    <main class="container">
+        <section id="about">
+            <h2>من أنا؟</h2>
+            <p>
+                هذا أول مشروع ويب أعمل عليه، وأطوره تدريجيًا
+                لاكتساب مهارات تصميم المواقع ونشرها.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>ما الذي أتعلمه؟</h2>
+
+            <div class="cards">
+                <article class="card">
+                    <h3>HTML</h3>
+                    <p>بناء هيكل صفحات الويب وتنظيم المحتوى.</p>
+                </article>
+
+                <article class="card">
+                    <h3>CSS</h3>
+                    <p>تنسيق الصفحات والألوان والخطوط والتصميم المتجاوب.</p>
+                </article>
+
+                <article class="card">
+                    <h3>GitHub</h3>
+                    <p>إدارة إصدارات المشروع ونشره والتعاون في تطويره.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>مشروعي الأول لتعلم تطوير المواقع</p>
+    </footer>
+
 </body>
 </html>
+

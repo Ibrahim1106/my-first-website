@@ -1,0 +1,113 @@
+
+/* إعدادات عامة */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+    background-color: #f4f7fb;
+    color: #1f2937;
+}
+
+/* شريط التنقل */
+nav {
+    background-color: #172554;
+    padding: 16px 8%;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #93c5fd;
+}
+
+/* الواجهة الرئيسية */
+.hero {
+    padding: 70px 8%;
+    background: linear-gradient(135deg, #1d4ed8, #172554);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 2.4rem;
+    margin-top: 0;
+}
+
+.hero p {
+    font-size: 1.1rem;
+}
+
+/* زر الإجراء */
+.button {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 8px;
+    background-color: white;
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* المحتوى والبطاقات */
+.container {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px #0000000d;
+}
+
+.card h3 {
+    color: #1d4ed8;
+}
+
+/* تذييل الصفحة */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background-color: #172554;
+    color: white;
+}
+
+/* تحسين العرض على الهواتف */
+@media (max-width: 700px) {
+    .hero {
+        padding: 40px 6%;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        gap: 14px;
+    }
+}
